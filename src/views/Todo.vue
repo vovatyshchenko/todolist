@@ -1,24 +1,23 @@
 <template>
-  <div id="app">
-    <div>
-      <h3>{{"Active tasks: "+ tasks.length}}</h3>
-      <hr />
-    </div>
-    <task
-      class="task"
-      @task_done="delete_task(index)"
-      :key="index"
-      v-for="(data,index) in tasks"
-      :data="data"
-    ></task>
-    <div>
-      <div class="new__task">
-        <input placeholder="New task..." type="text" v-model="new_task.title" />
-        <textarea placeholder="Description" type="text" v-model="new_task.desc"></textarea>
-      </div>
-      <button class="task__btn" @click="add_task">add</button>
-    </div>
-  </div>
+  <v-app>
+    <v-container>
+      <v-row>
+        <v-col cols="12" sm="12">
+          <div>
+            <span>{{"Active tasks: "+ tasks.length}}</span>
+          </div>
+            <task class="task" @task_done="delete_task(index)" :key="index" v-for="(data,index) in tasks" :data="data"></task>
+          <div>
+            <div>
+              <v-text-field placeholder="New task..." type="text" v-model="new_task.title" />
+              <v-textarea label="Description of task" auto-grow outlined row-height="15" v-model="new_task.desc" placeholder="Description"></v-textarea>
+            </div>
+            <v-btn @click="add_task" depressed large color="primary">ADD TASK</v-btn>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 <script>
 import task from "@/components/Task.vue";
@@ -64,30 +63,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#app {
-  max-width: 33%;
-  margin: 0 auto;
-  border: 2px solid #e5e5e5;
-  border-radius: 5px;
-}
-hr {
-  opacity: 0.5;
-}
-.new__task {
-  display: flex;
-  flex-direction: column;
-  max-width: 80%;
-  margin: 10px auto;
-}
-input {
-  margin-bottom: 5px;
-}
-textarea {
-  resize: none;
-}
-input,
-textarea {
-  padding: 5px;
-  border-radius: 3px;
-}
 </style>
