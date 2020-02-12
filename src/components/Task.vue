@@ -4,10 +4,14 @@
       <v-row justify="center">
         <v-col cols="12" sm="12">
           <div>
-            <p><strong>{{data.title}}</strong></p>
+            <p :class="{important:checked}"><strong>{{data.title}}</strong></p>
+            
             <p v-if="data.desc!=''">{{data.desc}}</p>
           </div>
-          <v-btn depressed large color="primary" @click="task_done()">DONE</v-btn>
+          <div class="btn__groupe">
+            <v-btn class="btn" depressed large color="primary" @click="task_done()">DONE</v-btn>
+            <v-switch v-model="checked" label="important!" color="red" hide-details></v-switch>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -17,7 +21,9 @@
 export default {
   props: ["data"],
   data() {
-    return {};
+    return {
+      checked: false
+    };
   },
   methods: {
     task_done() {
@@ -26,5 +32,14 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
+.btn__groupe {
+  display: flex;
+}
+.btn {
+  margin-right: 15px;
+}
+.important {
+  color: #ff0000;
+}
 </style>
