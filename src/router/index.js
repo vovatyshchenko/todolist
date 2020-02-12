@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Todo from '../views/Todo.vue'
+import SingIn from '../views/SingIn.vue'
+import SingOut from '../views/SingOut.vue'
+import SingUp from '../views/SingUp.vue'
+import Support from '../views/Support.vue'
 
 Vue.use(VueRouter)
 
@@ -11,12 +16,29 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/todo',
+    name: 'todo',
+    component: Todo
+  },
+  {
+    path: '/singin',
+    name: 'singin',
+    component: SingIn
+  },
+  {
+    path: '/singout',
+    name: 'singout',
+    component: SingOut
+  },
+  {
+    path: '/registration',
+    name: 'registration',
+    component: SingUp
+  },
+  {
+    path: '/support',
+    name: 'support',
+    component: Support
   }
 ]
 

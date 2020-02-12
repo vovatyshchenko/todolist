@@ -1,7 +1,7 @@
 <template>
-  <div>
-      <h1>HELLO IT IS HOME PAGE</h1>
-  </div>
+<div>
+    <h1>SING UP PAGE</h1>
+</div>
 </template>
 
 <script>
