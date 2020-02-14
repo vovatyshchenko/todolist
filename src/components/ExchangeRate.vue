@@ -1,12 +1,12 @@
 <template>
-<div>
-    <h1>SING OUT PAGE</h1>
-</div>
+  <div>
+      <span>$=27,5</span>
+  </div>
 </template>
 
 <script>
 export default {
-
+    
 }
 </script>
 

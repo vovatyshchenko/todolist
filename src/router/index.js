@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Todo from '../views/Todo.vue'
 import SingIn from '../views/SingIn.vue'
-import SingOut from '../views/SingOut.vue'
 import SingUp from '../views/SingUp.vue'
 import Support from '../views/Support.vue'
 
@@ -24,11 +23,6 @@ const routes = [
     path: '/singin',
     name: 'singin',
     component: SingIn
-  },
-  {
-    path: '/singout',
-    name: 'singout',
-    component: SingOut
   },
   {
     path: '/registration',

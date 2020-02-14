@@ -4,9 +4,9 @@
       <v-row justify="center">
         <v-col cols="12" sm="12">
           <div>
-            <p :class="{important:checked}"><strong>{{data.title}}</strong></p>
+            <p class="text-uppercase font-weight-black" :class="{important:checked}">{{data.title}}</p>
             
-            <p v-if="data.desc!=''">{{data.desc}}</p>
+            <p class="font-italic font-weight-medium" v-if="data.desc!=''">{{data.desc}}</p>
           </div>
           <div class="btn__groupe">
             <v-btn class="btn" depressed large color="primary" @click="task_done()">DONE</v-btn>

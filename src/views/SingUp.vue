@@ -12,7 +12,7 @@
           <v-col
             cols="12"
             sm="8"
-            md="4"
+            md="6"
           >
             <v-card class="elevation-12">
               <v-toolbar
@@ -20,58 +20,31 @@
                 dark
                 flat
               >
-                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar-title>REGISTRATION</v-toolbar-title>
                 <v-spacer />
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      :href="source"
-                      icon
-                      large
-                      target="_blank"
-                      v-on="on"
-                    >
-                      <v-icon>mdi-code-tags</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Source</span>
-                </v-tooltip>
-                <v-tooltip right>
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      icon
-                      large
-                      href="https://codepen.io/johnjleider/pen/pMvGQO"
-                      target="_blank"
-                      v-on="on"
-                    >
-                      <v-icon>mdi-codepen</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Codepen</span>
-                </v-tooltip>
+ 
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field
-                    label="Login"
+                  <v-text-field v-model="email"
+                    label="E-Mail"
                     name="login"
                     prepend-icon="person"
-                    type="text"
+                    type="text" required
                   />
 
-                  <v-text-field
+                  <v-text-field v-model="password"
                     id="password"
                     label="Password"
                     name="password"
                     prepend-icon="lock"
-                    type="password"
+                    type="password" required
                   />
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="primary">Login</v-btn>
+                <v-btn color="primary" @click.prevent="signup">Sign UP</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -84,6 +57,17 @@
 
 <script>
 export default {
+  data () {
+    return {
+      email: null,
+      password: null
+    }
+  },
+  methods: {
+    signup () {
+      this.$store.dispatch('signup',{email:this.email, password:this.password})
+    }
+  }
 
 }
 </script>
