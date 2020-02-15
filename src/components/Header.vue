@@ -108,7 +108,9 @@ export default {
   },
   methods: {
     sign_out() {
-      this.$store.dispatch('signout')
+      this.$confirm('Do you really want to sign out?').then(res => {
+        if (res === true) {this.$store.dispatch('signout')}
+      })
     }
   },
   watch: {

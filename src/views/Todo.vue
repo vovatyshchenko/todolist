@@ -11,7 +11,6 @@
           <div>
             <span>{{"Active tasks: "+ tasks.length}}</span>
           </div>
-            <task-list class="task" @task_done="delete_task(index)" :key="index" v-for="(data,index) in tasks" :data="data"></task-list>
           <div>
             <v-form v-model="task_valid">
               <v-text-field label="New task..." type="text" v-model="new_task.title" :rules="task_rules"/>
@@ -19,6 +18,7 @@
             </v-form>
             <v-btn @click="add_task" depressed large color="primary" :disabled="!task_valid">ADD TASK</v-btn>
           </div>
+          <task-list class="task" @task_done="delete_task(index)" :key="index" v-for="(data,index) in tasks" :data="data"></task-list>
         </v-col>
       </v-row>
     </v-container>
@@ -36,7 +36,8 @@ export default {
       search: null,
       task_valid: false,
       task_rules: [
-        (v) => !!v || "Please, enter task"
+        // (v) => !!v || "Please, enter task",
+        (v) => (v.length >= 1) || "Please, enter task"
       ]
     };
   },
@@ -57,7 +58,7 @@ export default {
   methods: {
     add_task() {
       if (this.new_task.title !== "") {
-        this.tasks.push({
+        this.tasks.unshift({
           title: this.new_task.title,
           desc: this.new_task.desc
         });

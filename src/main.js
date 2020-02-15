@@ -1,12 +1,19 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
-import vuetify from "@/plugins/vuetify";
-import firebaseConfig from "./config/Firebase.js";
-import firebase from "firebase";
+import Vue from "vue"
+import App from "./App.vue"
+import router from "./router"
+import store from "./store"
+import vuetify from "@/plugins/vuetify"
+import firebaseConfig from "./config/Firebase.js"
+import firebase from "firebase"
+import VuetifyConfirm from "vuetify-confirm"
 
 Vue.config.productionTip = false;
+
+Vue.use(VuetifyConfirm, {
+  vuetify,
+  buttonTrueText: 'OK',
+  buttonFalseText: 'CANCEL'
+})
 
 firebase.initializeApp(firebaseConfig);
 

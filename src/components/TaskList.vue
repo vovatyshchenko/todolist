@@ -27,7 +27,9 @@ export default {
   },
   methods: {
     task_done() {
-      this.$emit("task_done");
+      this.$confirm('It is done?').then(res => {
+        if (res === true) {this.$emit("task_done")}
+      })
     }
   }
 };
