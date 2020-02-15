@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
+    <div>
       <h1>HELLO IT IS HOME PAGE</h1>
-  </div>
+    </div>
+  </v-parallax>
 </template>
 
 <script>

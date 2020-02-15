@@ -5,6 +5,8 @@ import store from "./store"
 import vuetify from "@/plugins/vuetify"
 import firebaseConfig from "./config/Firebase.js"
 import firebase from "firebase"
+import 'firebase/firestore'
+import { firestorePlugin } from 'vuefire'
 import VuetifyConfirm from "vuetify-confirm"
 
 Vue.config.productionTip = false;
@@ -15,7 +17,13 @@ Vue.use(VuetifyConfirm, {
   buttonFalseText: 'CANCEL'
 })
 
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore()
+// db.settings({timestampsInSnapshots: true});
+
+Vue.$db = db
+
+Vue.use(firestorePlugin)
 
 new Vue({
   router,
@@ -27,5 +35,6 @@ new Vue({
     firebase.auth().onAuthStateChanged(function(user) {
       vm.$store.dispatch("state_change", user);
     });
+    this.$store.dispatch('load_tasks')
   }
 }).$mount("#app");

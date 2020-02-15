@@ -72,12 +72,12 @@ export default {
       return this.isUserAuthenticated
         ? [
             {
-              icon: "visibility",
+              icon: "post_add",
               title: "My notifications",
               route: "/todo"
             },
             {
-              icon: "input",
+              icon: "contact_support",
               title: "Support",
               route: "/support"
             }
@@ -94,7 +94,7 @@ export default {
               route: "/registration"
             },
             {
-              icon: "input",
+              icon: "contact_support",
               title: "Support",
               route: "/support"
             }

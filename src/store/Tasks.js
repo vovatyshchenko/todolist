@@ -1,23 +1,34 @@
+import Vue from "vue"
+
 export default {
   state: {
-    tasks: [
-      {
-        title: "Some title",
-        desc: "Some description"
-      },
-      {
-        title: "Some title",
-        desc: "Some description"
-      }
-    ],
+    tasks: [],
     new_task: {
       title: "",
       desc: ""
     }
   },
   mutations: {
-    SET_TASKS(state, load) {
+    set_tasks(state, load) {
       state.tasks = load;
+    }
+  },
+  actions: {
+    load_tasks ({commit}) {
+      Vue.$db.collection('tasks').get().then(querySnapshot => {
+        let tasks = []
+        querySnapshot.forEach(s => {
+          const data = s.data()
+          let task = {
+            id: s.id,
+            title: data.title,
+            desc: data.desc,
+            created_at: data.created_at
+          }
+          tasks.push(task)
+        })
+        commit('set_tasks', tasks)
+      }).catch(error => console.log(error))
     }
   },
   getters: {

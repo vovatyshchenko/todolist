@@ -1,18 +1,19 @@
 <template>
-  <v-card>
+  <v-card class="my-2" justify="center">
     <v-container>
-      <v-row justify="center">
-        <v-col cols="12" sm="12">
-          <div>
-            <p class="text-uppercase font-weight-black" :class="{important:checked}">{{data.title}}</p>
-            <p class="font-italic font-weight-medium" v-if="data.desc!=''">{{data.desc}}</p>
-          </div>
-          <div class="btn__groupe">
-            <v-btn class="btn" depressed large color="primary" @click="task_done()">DONE</v-btn>
-            <v-switch v-model="checked" label="important!" color="red" hide-details></v-switch>
-          </div>
-          <hr>
-        </v-col>
+      <v-row>
+          <v-col cols="12" sm="12">
+              <div>
+                <p class="text-uppercase font-weight-black" :class="{important:checked}">{{data.title}}</p>
+                <p class="font-italic font-weight-medium" v-if="data.desc!=''">{{data.desc}}</p>
+              </div>
+            </v-col>
+            <v-col cols="12" sm="12">
+              <div class="btn__groupe">
+                <v-btn class="btn" depressed large color="primary" @click="task_done()">DONE</v-btn>
+                <v-switch v-model="checked" label="important!" color="red" hide-details></v-switch>
+              </div>
+            </v-col>
       </v-row>
     </v-container>
   </v-card>
