@@ -10,12 +10,7 @@
       <v-divider></v-divider>
 
       <v-list dense>
-        <v-list-item
-          v-for="(item, index) in nav_items"
-          :key="`drawer_item${index}`"
-          link
-          :to="item.route"
-        >
+        <v-list-item v-for="(item, index) in nav_items" :key="`drawer_item${index}`" link :to="item.route">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -50,10 +45,10 @@
         :key="`nav_item${index}`"
         :to="item.route"
         class="hidden-sm-and-down"
-      >{{ item.title }}</v-btn>
+        ><v-icon v-html="item.icon"></v-icon>{{ item.title }}</v-btn>
 
 
-      <v-btn @click.prevent="sign_out" v-if="isUserAuthenticated" text large class="hidden-sm-and-down">Sign out</v-btn>
+      <v-btn @click.prevent="sign_out" v-if="isUserAuthenticated" text large class="hidden-sm-and-down"><v-icon v-html="'input'"></v-icon>Sign out</v-btn>
 
 
     </v-app-bar>
@@ -82,7 +77,7 @@ export default {
               route: "/todo"
             },
             {
-              icon: "support",
+              icon: "input",
               title: "Support",
               route: "/support"
             }
@@ -99,7 +94,7 @@ export default {
               route: "/registration"
             },
             {
-              icon: "support",
+              icon: "input",
               title: "Support",
               route: "/support"
             }

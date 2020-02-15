@@ -45,7 +45,7 @@ const router = new VueRouter({
 })
 
 function guard(from, to, next) {
-  if (Store.getters.isUserAuthenticated ===true) next()
+  if (Store.getters.isUserAuthenticated === true) next()
   else next('/singin')
 }
 
