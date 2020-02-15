@@ -13,11 +13,11 @@
           </div>
             <task-list class="task" @task_done="delete_task(index)" :key="index" v-for="(data,index) in tasks" :data="data"></task-list>
           <div>
-            <div>
-              <v-text-field label="New task..." type="text" v-model="new_task.title" />
+            <v-form v-model="task_valid">
+              <v-text-field label="New task..." type="text" v-model="new_task.title" :rules="task_rules"/>
               <v-textarea label="Description of task" auto-grow outlined row-height="15" v-model="new_task.desc"></v-textarea>
-            </div>
-            <v-btn @click="add_task" depressed large color="primary">ADD TASK</v-btn>
+            </v-form>
+            <v-btn @click="add_task" depressed large color="primary" :disabled="!task_valid">ADD TASK</v-btn>
           </div>
         </v-col>
       </v-row>
@@ -33,7 +33,11 @@ export default {
   },
   data() {
     return {
-      search: null
+      search: null,
+      task_valid: false,
+      task_rules: [
+        (v) => !!v || "Please, enter task"
+      ]
     };
   },
   computed: {

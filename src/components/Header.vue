@@ -19,7 +19,6 @@
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
-
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
@@ -52,6 +51,11 @@
         :to="item.route"
         class="hidden-sm-and-down"
       >{{ item.title }}</v-btn>
+
+
+      <v-btn @click.prevent="sign_out" v-if="isUserAuthenticated" text large class="hidden-sm-and-down">Sign out</v-btn>
+
+
     </v-app-bar>
     <v-sheet id="scrolling-techniques-2" class="overflow-y-auto" max-height="150">
       <v-container style="height: 1000px;"></v-container>
@@ -66,36 +70,52 @@ export default {
     };
   },
   computed: {
+    isUserAuthenticated() {
+      return this.$store.getters.isUserAuthenticated;
+    },
     nav_items() {
-      return [
-        {
-          icon: "visibility",
-          title: "My notifications",
-          route: "/todo"
-        },
-        {
-          icon: "exit_to_app",
-          title: "Sing out",
-          route: "/singout"
-        },
-        {
-          icon: "input",
-          title: "Sing in",
-          route: "/singin"
-        },
-        {
-          icon: "lock_open",
-          title: "Singup",
-          route: "/registration"
-        },
-        {
-          icon: "support",
-          title: "Support",
-          route: "/support"
-        }
-      ];
+      return this.isUserAuthenticated
+        ? [
+            {
+              icon: "visibility",
+              title: "My notifications",
+              route: "/todo"
+            },
+            {
+              icon: "support",
+              title: "Support",
+              route: "/support"
+            }
+          ]
+        : [
+            {
+              icon: "input",
+              title: "Sign in",
+              route: "/singin"
+            },
+            {
+              icon: "lock_open",
+              title: "Sign up",
+              route: "/registration"
+            },
+            {
+              icon: "support",
+              title: "Support",
+              route: "/support"
+            }
+          ];
     }
-  }
+  },
+  methods: {
+    sign_out() {
+      this.$store.dispatch('signout')
+    }
+  },
+  watch: {
+    isUserAuthenticated(value) {
+      if (value === false) this.$router.push({ path: "/" });
+    }
+  },
 };
 </script>
 

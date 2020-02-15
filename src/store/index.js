@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import UserModul from '@/store/User.js'
-import TasksModul from '@/store/Tasks.js'
-import CommonModul from '@/store/Common.js'
+import Vue from "vue";
+import Vuex from "vuex";
+import UserModul from "@/store/User.js";
+import TasksModul from "@/store/Tasks.js";
+import CommonModul from "@/store/Common.js";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
@@ -12,4 +12,4 @@ export default new Vuex.Store({
     UserModul,
     TasksModul
   }
-})
+});
