@@ -13,26 +13,32 @@
           </div>
           <div>
             <v-form v-model="task_valid">
-              <v-text-field label="New task..." type="text" v-model="new_task.title" :rules="task_rules"/>
-              <v-textarea label="Description of task" auto-grow outlined row-height="15" v-model="new_task.desc"></v-textarea>
+              <v-text-field label="New task..." type="text" v-model="new_task_title" :rules="task_rules"/>
+              <v-textarea label="Description of task" auto-grow outlined row-height="15" v-model="new_task_desc"></v-textarea>
             </v-form>
             <v-btn @click="add_task" depressed large color="primary" :disabled="!task_valid">ADD TASK</v-btn>
           </div>
-          <task-list class="task" @task_done="delete_task(index)" :key="index" v-for="(data,index) in tasks" :data="data"></task-list>
+          <task-list class="task" @task_done="delete_task(index)" v-for="(data,index) in tasks"  :key="index" :data="data"></task-list>
         </v-col>
       </v-row>
     </v-container>
   </v-app>
 </template>
 <script>
-import TaskList from "@/components/TaskList.vue";
+import TaskList from "@/components/TaskList.vue"
+import Vue from "vue"
 
 export default {
   components: {
     TaskList
   },
+  beforeUpdate() {
+    this.$store.dispatch('load_tasks')
+  },
   data() {
     return {
+      new_task_title: '',
+      new_task_desc: '',
       search: null,
       task_valid: false,
       task_rules: [
@@ -43,10 +49,7 @@ export default {
   },
   computed: {
     tasks () {
-      return this.$store.getters.getTasks
-    },
-    new_task () {
-      return this.$store.getters.getnew_Tasks
+      return this.$store.getters.get_tasks
     },
     filteredtasks () {
       let tasks = this.tasks
@@ -57,18 +60,24 @@ export default {
   },
   methods: {
     add_task() {
-      if (this.new_task.title !== "") {
-        this.tasks.unshift({
-          title: this.new_task.title,
-          desc: this.new_task.desc
-        });
-        this.new_task.title = "";
-        this.new_task.desc = "";
+      if (this.new_task_title !== "") {
+        const date = new Date()
+        Vue.$db.collection('tasks').doc().set({
+          title: this.new_task_title,
+          desc: this.new_task_desc,
+          created_at: date
+        }).then(function() {console.log("Document successfully written!")}).catch(error => console.log(error))
+      this.new_task_title = ""
+      this.new_task_desc = ""
       }
     },
-    delete_task(id) {
-      this.tasks.splice(id, 1);
-    }
+    delete_task(index) {
+      Vue.$db.collection("tasks").doc(this.$store.getters.get_tasks[index].id).delete().then(function() {
+      console.log("Document successfully deleted!");
+      }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+     }
   }
 };
 </script>

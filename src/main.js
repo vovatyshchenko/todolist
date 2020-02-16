@@ -15,7 +15,7 @@ Vue.use(VuetifyConfirm, {
   vuetify,
   buttonTrueText: 'OK',
   buttonFalseText: 'CANCEL'
-})
+});
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore()
@@ -35,6 +35,5 @@ new Vue({
     firebase.auth().onAuthStateChanged(function(user) {
       vm.$store.dispatch("state_change", user);
     });
-    this.$store.dispatch('load_tasks')
   }
 }).$mount("#app");

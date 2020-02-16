@@ -2,20 +2,16 @@ import Vue from "vue"
 
 export default {
   state: {
-    tasks: [],
-    new_task: {
-      title: "",
-      desc: ""
-    }
+    tasks: []
   },
   mutations: {
-    set_tasks(state, load) {
-      state.tasks = load;
+    set_tasks(state, payload) {
+      state.tasks = payload;
     }
   },
   actions: {
     load_tasks ({commit}) {
-      Vue.$db.collection('tasks').get().then(querySnapshot => {
+      Vue.$db.collection('tasks').orderBy('created_at','desc').get().then(querySnapshot => {
         let tasks = []
         querySnapshot.forEach(s => {
           const data = s.data()
@@ -32,7 +28,6 @@ export default {
     }
   },
   getters: {
-    getTasks: state => state.tasks,
-    getnew_Tasks: state => state.new_task
+    get_tasks: state => state.tasks
   }
 };
