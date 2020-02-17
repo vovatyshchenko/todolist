@@ -25,8 +25,8 @@
   </v-app>
 </template>
 <script>
-import TaskList from "@/components/TaskList.vue"
 import Vue from "vue"
+import TaskList from "@/components/TaskList.vue"
 
 export default {
   components: {
@@ -48,7 +48,7 @@ export default {
     };
   },
   computed: {
-    tasks () {
+    tasks() {
       return this.$store.getters.get_tasks
     },
     filteredtasks () {

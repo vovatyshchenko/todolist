@@ -6,7 +6,6 @@ import vuetify from "@/plugins/vuetify"
 import firebaseConfig from "./config/Firebase.js"
 import firebase from "firebase"
 import 'firebase/firestore'
-import { firestorePlugin } from 'vuefire'
 import VuetifyConfirm from "vuetify-confirm"
 
 Vue.config.productionTip = false;
@@ -23,15 +22,13 @@ const db = firebaseApp.firestore()
 
 Vue.$db = db
 
-Vue.use(firestorePlugin)
-
 new Vue({
   router,
   store,
   vuetify,
   render: h => h(App),
   created() {
-    let vm = this;
+    let vm = this
     firebase.auth().onAuthStateChanged(function(user) {
       vm.$store.dispatch("state_change", user);
     });

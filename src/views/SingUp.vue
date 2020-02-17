@@ -12,35 +12,13 @@
               <v-card-text>
                 <v-alert :value="error" type="warning">{{ error }}</v-alert>
                 <v-form v-model="valid">
-                  <v-text-field
-                    v-model="email"
-                    label="E-Mail"
-                    name="login"
-                    prepend-icon="person"
-                    type="text"
-                    required
-                    :rules="erules"
-                  />
-
-                  <v-text-field
-                    v-model="password"
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="lock"
-                    type="password"
-                    required
-                    :rules="prules"
-                  />
+                  <v-text-field v-model="email" label="E-Mail" name="login" prepend-icon="person" type="text" required :rules="erules"/>
+                  <v-text-field v-model="password" id="password" label="Password" name="password" prepend-icon="lock" type="password" required :rules="prules"/>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn
-                  color="primary"
-                  @click.prevent="signup"
-                  :disabled="processing || !valid"
-                >Sign UP</v-btn>
+                <v-btn color="primary" @click.prevent="signup" :disabled="processing || !valid">Sign UP</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -49,7 +27,6 @@
     </v-content>
   </v-app>
 </template>
-
 
 <script>
 export default {
@@ -66,21 +43,21 @@ export default {
         (v) => !!v || "Please, enter password",
         (v) => (v && v.length >= 6) || "password is too short - must be 6 symbol or more"
       ]
-    };
+    }
   },
   computed: {
     error() {
-      return this.$store.getters.getError;
+      return this.$store.getters.get_error;
     },
     processing() {
-      return this.$store.getters.getProcessing;
+      return this.$store.getters.get_processing;
     },
-    isUserAuthenticated() {
-      return this.$store.getters.isUserAuthenticated;
+    is_user_authenticated() {
+      return this.$store.getters.is_user_authenticated;
     }
   },
   watch: {
-    isUserAuthenticated(value) {
+    is_user_authenticated(value) {
       if (value === true) this.$router.push({ path: "/todo" });
     }
   },

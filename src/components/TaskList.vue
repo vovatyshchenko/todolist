@@ -12,29 +12,35 @@
               <div class="btn__groupe">
                 <v-btn class="btn" depressed large color="primary" @click="task_done()">DONE</v-btn>
                 <v-switch v-model="checked" label="important!" color="red" hide-details></v-switch>
+                <span class="font-italic font-weight-medium my-auto">{{data.created_at}}</span>
               </div>
             </v-col>
       </v-row>
     </v-container>
   </v-card>
 </template>
+
 <script>
 export default {
   props: ["data"],
   data() {
     return {
       checked: false
-    };
+    }
   },
   methods: {
     task_done() {
       this.$confirm('It is done?').then(res => {
-        if (res === true) {this.$emit("task_done")}
+        if (res === true) 
+          {
+            this.$emit("task_done")
+          }
       })
     }
   }
-};
+}
 </script>
+
 <style scoped lang="scss">
 .btn__groupe {
   display: flex;
