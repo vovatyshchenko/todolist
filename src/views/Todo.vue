@@ -42,8 +42,7 @@ export default {
       search: null,
       task_valid: false,
       task_rules: [
-        // (v) => !!v || "Please, enter task",
-        (v) => (v.length >= 1) || "Please, enter task"
+        (v) => (v.length >= 1) 
       ]
     };
   },
@@ -61,22 +60,20 @@ export default {
   methods: {
     add_task() {
       if (this.new_task_title !== "") {
-        const date = new Date()
+        const date = new Date().toLocaleString()
         Vue.$db.collection('tasks').doc().set({
           title: this.new_task_title,
           desc: this.new_task_desc,
           created_at: date
-        }).then(function() {console.log("Document successfully written!")}).catch(error => console.log(error))
+        }).then(function() {}).catch()
       this.new_task_title = ""
       this.new_task_desc = ""
       }
     },
     delete_task(index) {
-      Vue.$db.collection("tasks").doc(this.$store.getters.get_tasks[index].id).delete().then(function() {
-      console.log("Document successfully deleted!");
-      }).catch(function(error) {
-      console.error("Error removing document: ", error);
-    });
+      Vue.$db.collection("tasks").doc(this.$store.getters.get_tasks[index].id).delete()
+      .then(function() {})
+      .catch(function() {})
      }
   }
 };

@@ -24,7 +24,7 @@ export default {
           tasks.push(task)
         })
         commit('set_tasks', tasks)
-      }).catch(error => console.log(error))
+      }).catch(error => {error})
     }
   },
   getters: {

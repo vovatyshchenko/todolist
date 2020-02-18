@@ -1,8 +1,7 @@
 <template>
     <div>
         <v-footer :fixed="true" app>
-            <span>{{ date }}</span>
-            <exchange-rate></exchange-rate>
+            <exchange-rate class="font-italic ml-auto"></exchange-rate>
         </v-footer>
     </div>
 </template>
@@ -13,11 +12,6 @@ import ExchangeRate from "@/components/ExchangeRate.vue";
     export default {
         components: {
             ExchangeRate
-        },
-        data () {
-            return {
-                date: new Date ()
-            }
         }
     }
 </script>

@@ -7,6 +7,7 @@ import firebaseConfig from "./config/Firebase.js"
 import firebase from "firebase"
 import 'firebase/firestore'
 import VuetifyConfirm from "vuetify-confirm"
+import './plugins/base'
 
 Vue.config.productionTip = false;
 

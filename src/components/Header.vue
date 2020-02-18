@@ -1,6 +1,6 @@
 <template>
   <v-card class="overflow-hidden">
-    <v-navigation-drawer v-model="drawer" absolute temporary class="hidden-md-and-up">
+    <v-navigation-drawer v-model="drawer" :fixed="true" app temporary class="hidden-md-and-up">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title>ToDo LIST</v-list-item-title>
@@ -16,6 +16,17 @@
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+<v-list-item @click.prevent="sign_out" v-if="is_user_authenticated">
+          <v-list-item-icon>
+            <v-icon v-html="'input'"></v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Sign out</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        
       </v-list>
     </v-navigation-drawer>
     <v-app-bar absolute color="#fcb69f" dark shrink-on-scroll src="https://picsum.photos/1920/1080?random" scroll-target="#scrolling-techniques-2">
@@ -32,12 +43,11 @@
         <v-icon v-html="'input'"></v-icon>Sign out
       </v-btn>
     </v-app-bar>
-      <v-sheet id="scrolling-techniques-2" class="overflow-y-auto" max-height="150">
+      <v-sheet id="scrolling-techniques-2"  max-height="128">
         <v-container style="height: 1000px;"></v-container>
       </v-sheet>
   </v-card>
 </template>
-
 <script>
 export default {
   data() {

@@ -5,13 +5,17 @@
 </template>
 
 <script>
+
 export default {
     created(){
       this.$store.dispatch('load_rate')
     },
     computed:{
       rate(){
-        return this.$store.getters.rate_exchengr
+        let arr=[]
+        arr=this.$store.getters.rate_exchengr
+        arr=arr.slice(0,2)
+        return arr
       }
     }
 }
