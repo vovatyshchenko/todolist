@@ -18,7 +18,7 @@
             </v-form>
             <v-btn @click="add_task" depressed large color="primary" :disabled="!task_valid">ADD TASK</v-btn>
           </div>
-          <task-list class="task" @task_done="delete_task(index)" v-for="(data,index) in tasks"  :key="index" :data="data"></task-list>
+          <task-list class="task" @task_done="delete_task(index)" v-for="(data,index) in filteredtasks"  :key="index" :data="data"></task-list>
         </v-col>
       </v-row>
     </v-container>
@@ -32,7 +32,7 @@ export default {
   components: {
     TaskList
   },
-  beforeUpdate() {
+  created() {
     this.$store.dispatch('load_tasks')
   },
   data() {
@@ -50,11 +50,14 @@ export default {
     tasks() {
       return this.$store.getters.get_tasks
     },
-    filteredtasks () {
+    filteredtasks() {
       let tasks = this.tasks
-      if (this.filteredtasks)
-        tasks = tasks.filter(t=>t.title.toLowerCase().indexOf(this.filteredtasks.toLowerCase()) >=0 || t.desc.toLowerCase().indexOf(this.filteredtasks.toLowerCase()) >=0)
-        return tasks   
+      if (this.search) {
+        tasks = tasks.filter(t=>
+          t.title.toLowerCase().indexOf(this.search.toLowerCase()) >=0 
+            || t.desc.toLowerCase().indexOf(this.search.toLowerCase()) >=0)
+      }
+      return tasks   
     }   
   },
   methods: {
@@ -68,12 +71,14 @@ export default {
         }).then(function() {}).catch()
       this.new_task_title = ""
       this.new_task_desc = ""
+      this.$store.dispatch('load_tasks')
       }
     },
     delete_task(index) {
       Vue.$db.collection("tasks").doc(this.$store.getters.get_tasks[index].id).delete()
       .then(function() {})
       .catch(function() {})
+      this.$store.dispatch('load_tasks')
      }
   }
 };

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-footer :fixed="true" app>
+        <v-footer :fixed="true" app class="footer">
             <exchange-rate class="font-italic ml-auto"></exchange-rate>
         </v-footer>
     </div>
@@ -17,5 +17,7 @@ import ExchangeRate from "@/components/ExchangeRate.vue";
 </script>
 
 <style lang="scss" scoped>
-
+.footer {
+    opacity: .7
+}
 </style>

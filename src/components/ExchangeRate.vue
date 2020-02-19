@@ -1,6 +1,6 @@
 <template>
   <div>
-      <span v-for="(r,index) in rate" :key="index"> {{r.ccy}} buy: {{r.buy}} sale: {{r.sale}}</span>
+      <small v-for="(r,index) in rate" :key="index"> {{r.ccy}} buy: {{r.buy}} sale: {{r.sale}}</small>
   </div>
 </template>
 
