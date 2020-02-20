@@ -49,7 +49,8 @@ export default {
     state_change({ commit }, payload) {
       if (payload) {
         commit("set_user", payload.u_id)
-      } else {
+      } 
+      else {
         commit("un_set_user");
       }
     }

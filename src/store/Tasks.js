@@ -19,7 +19,8 @@ export default {
             id: s.id,
             title: data.title,
             desc: data.desc,
-            created_at: data.created_at
+            created_at: data.created_at,
+            updated_at: data.updated_at
           }
           tasks.push(task)
         })

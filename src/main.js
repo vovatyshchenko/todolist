@@ -19,7 +19,6 @@ Vue.use(VuetifyConfirm, {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore()
-// db.settings({timestampsInSnapshots: true});
 
 Vue.$db = db
 

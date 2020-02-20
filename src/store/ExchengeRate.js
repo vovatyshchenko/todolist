@@ -16,14 +16,9 @@ export default ({
         money = res.data;
         commit("set_money", money)
       })
-      .catch(error => {
-        console.log(error)
-    })
     }
   },
   getters: {
-    rate_exchengr(state) {
-      return state.money
+    rate_exchengr: state => state.money
     }
-  }
 })

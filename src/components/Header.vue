@@ -16,8 +16,7 @@
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-<v-list-item @click.prevent="sign_out" v-if="is_user_authenticated">
+        <v-list-item @click.prevent="sign_out" v-if="is_user_authenticated">
           <v-list-item-icon>
             <v-icon v-html="'input'"></v-icon>
           </v-list-item-icon>
@@ -25,8 +24,6 @@
             <v-list-item-title>Sign out</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-        
       </v-list>
     </v-navigation-drawer>
     <v-app-bar absolute color="#fcb69f" dark shrink-on-scroll src="https://picsum.photos/1920/1080?random" scroll-target="#scrolling-techniques-2">
@@ -60,52 +57,51 @@ export default {
       return this.$store.getters.is_user_authenticated;
     },
     nav_items() {
-      return this.is_user_authenticated
-        ? [
-            {
-              icon: "post_add",
-              title: "My notifications",
-              route: "/todo"
-            },
-            {
-              icon: "contact_support",
-              title: "Support",
-              route: "/support"
-            }
-          ]
-        : [
-            {
-              icon: "input",
-              title: "Sign in",
-              route: "/singin"
-            },
-            {
-              icon: "lock_open",
-              title: "Sign up",
-              route: "/registration"
-            },
-            {
-              icon: "contact_support",
-              title: "Support",
-              route: "/support"
-            }
-          ];
+      return this.is_user_authenticated ? [
+        {
+          icon: "contact_support",
+          title: "Home",
+          route: "/"
+        },
+        {
+          icon: "post_add",
+          title: "My notifications",
+          route: "/todo"
+        }
+      ] :
+      [
+        {
+          icon: "contact_support",
+          title: "Home",
+          route: "/"
+        },
+        {
+          icon: "input",
+          title: "Sign in",
+          route: "/singin"
+        },
+        {
+          icon: "lock_open",
+          title: "Sign up",
+          route: "/registration"
+        }
+      ];
     }
   },
   methods: {
     sign_out() {
-      this.$confirm('Do you really want to sign out?').then(res =>
-      {
-        if (res === true)
-          {
-            this.$store.dispatch('signout')
-          }
+      this.$confirm('Do you really want to sign out?').then(res =>{
+        if (res === true){
+          this.$store.dispatch('signout')
+        }
       })
     }
   },
   watch: {
     is_user_authenticated(value) {
-      if (value === false) this.$router.push({ path: "/" })
+      if (value === false) {
+        this.$router.push({ path: "/" })
+      }
     }
   },
 }

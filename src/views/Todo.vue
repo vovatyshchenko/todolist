@@ -41,10 +41,8 @@ export default {
       new_task_desc: '',
       search: null,
       task_valid: false,
-      task_rules: [
-        (v) => (v.length >= 1) 
-      ]
-    };
+      task_rules: [ (v) => (v.length >= 1) ]
+    }
   },
   computed: {
     tasks() {
@@ -55,7 +53,7 @@ export default {
       if (this.search) {
         tasks = tasks.filter(t=>
           t.title.toLowerCase().indexOf(this.search.toLowerCase()) >=0 
-            || t.desc.toLowerCase().indexOf(this.search.toLowerCase()) >=0)
+          || t.desc.toLowerCase().indexOf(this.search.toLowerCase()) >=0)
       }
       return tasks   
     }   
@@ -64,24 +62,23 @@ export default {
     add_task() {
       if (this.new_task_title !== "") {
         const date = new Date().toLocaleString()
-        Vue.$db.collection('tasks').doc().set({
+        Vue.$db.collection('tasks').add({
           title: this.new_task_title,
           desc: this.new_task_desc,
-          created_at: date
-        }).then(function() {}).catch()
+          created_at: date,
+          updated_at: null
+      })
+      this.$store.dispatch('load_tasks')
       this.new_task_title = ""
       this.new_task_desc = ""
-      this.$store.dispatch('load_tasks')
       }
     },
     delete_task(index) {
       Vue.$db.collection("tasks").doc(this.$store.getters.get_tasks[index].id).delete()
-      .then(function() {})
-      .catch(function() {})
       this.$store.dispatch('load_tasks')
      }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

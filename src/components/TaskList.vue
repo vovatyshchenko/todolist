@@ -21,8 +21,8 @@
                           </v-card-text>
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                            <v-btn color="blue darken-1" text @click="edit_task(data.id)" :disabled="!task_valid">Save</v-btn>
+                            <v-btn color="blue darken-1" text @click.prevent="dialog = false">Close</v-btn>
+                            <v-btn color="blue darken-1" text @click.prevent="edit_task(data.id)" :disabled="!task_valid">Save</v-btn>
                           </v-card-actions>
                         </v-card>
                       </v-form>
@@ -37,6 +37,9 @@
                   <v-btn class="mr-4" depressed large color="primary" @click="task_done()">DONE</v-btn>
                   <v-switch v-model="checked" label="important!" color="red" hide-details></v-switch>
                   <small class="mt-auto ml-auto">{{data.created_at}}</small>
+                </div>
+                <div class="d-flex">
+                  <small class="mt-auto ml-auto" v-if="data.updated_at!=''">{{data.updated_at}}</small>
                 </div>
               </v-col>
         </v-row>
@@ -55,9 +58,7 @@ export default {
       checked: false,
       dialog: false,
       task_valid: false,
-      task_rules: [
-      (v) => (v.length >= 1) 
-      ],
+      task_rules: [ (v) => (v.length >= 1) ],
       edit_title: this.data.title,
       edit_desc: this.data.desc
     }
@@ -65,21 +66,20 @@ export default {
   methods: {
     task_done() {
       this.$confirm('It is done?').then(res => {
-        if (res === true) 
-          {
-            this.$emit("task_done")
-          }
+        if (res === true) {
+          this.$emit("task_done")
+        }
       })
     },
     edit_task(index){
-        const date = 'updeted ' + new Date().toLocaleString()
+      const date = 'updated ' + new Date().toLocaleString()
         Vue.$db.collection('tasks').doc(index).set({
           title: this.edit_title,
           desc: this.edit_desc,
-          created_at: date
-        }).then(function() {})
-        this.$store.dispatch('load_tasks')
-        .catch()
+          created_at: this.data.created_at,
+          updated_at: date
+        })
+      this.$store.dispatch('load_tasks')
       this.dialog = false
     }
   }
